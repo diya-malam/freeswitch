@@ -1,0 +1,39 @@
+<include>
+
+	<extension name="sample_ivr">
+	      <condition field="destination_number" expression="^1080$">
+       			 <action application="answer"/>
+               		 <!-- <action application="sleep" data="2000"/>-->
+        		 <action application="ivr" data="task_3_ivr"/>
+     	      </condition>
+        </extension>
+
+	 <extension name="1112">
+              <condition field="destination_number" expression="^1112$">
+                        <action application="ring_ready"/>
+                        <action application="set" data="call_timeout=10"/>
+                        <action application="log" data="NOTICE ************** CALLING ${destination_number} **************"/>
+                        <action application="bridge" data="user/${destination_number}@${domain_name}"/>
+                        <action application="log" data="NOTICE ************** CALL_TIMEOUT:  ${call_timeout} **************"/>
+
+              </condition>
+        </extension>
+	
+	<extension name="joke">
+              <condition field="destination_number" expression="^1818$">
+                         <action application="answer"/>
+			 <action application="playback" data="/home/diya/Downloads/joke.wav"/>
+			 <action applicaion="sleep" data="3000"/>
+              </condition>
+        </extension>
+
+	<extension name="freeswitch">
+              <condition field="destination_number" expression="^1819$">
+                         <action application="answer"/>
+                         <action application="playback" data="/home/diya/Downloads/freeswitch.wav"/>
+                         <action applicaion="sleep" data="3000"/>
+              </condition>
+        </extension>
+
+
+</include>

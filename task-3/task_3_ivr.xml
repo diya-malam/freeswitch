@@ -1,0 +1,43 @@
+<include>
+  <menu name="task_3_ivr"
+      greet-long="/home/diya/Downloads/long-menu.wav"
+      greet-short="/home/diya/Downloads/short-menu.wav"
+      invalid-sound="ivr/ivr-that_was_an_invalid_entry.wav"
+      exit-sound="voicemail/vm-goodbye.wav"
+      confirm-macro=""
+      confirm-key=""
+      tts-engine="flite"
+      tts-voice="rms"
+      confirm-attempts="3"
+      timeout="10000"
+      inter-digit-timeout="2000"
+      max-failures="3"
+      max-timeouts="3"
+      digit-len="4">
+
+    <entry action="menu-exec-app" digits="/^(1112)$/" param="transfer $1 XML default"/> <!--dial to extension-->    
+    <entry action="menu-exec-app" digits="1" param="transfer 6779 XML default"/>    <!-- echo -->
+    <entry action="menu-exec-app" digits="2" param="transfer 911111 XML default"/>  <!-- call-park -->
+    <entry action="menu-exec-app" digits="3" param="transfer 1818 XML default"/>    <!-- joke -->
+    <entry action="menu-sub" digits="4" param="ivr_submenu"/>                  <!--  sub menu -->
+    <entry action="menu-top" digits="9"/>          <!-- Repeat this menu -->
+  </menu>
+
+ <!-- IVR, Sub Menu -->
+  <menu name="ivr_submenu"
+      greet-long="/home/diya/Downloads/sub-menu-long.wav"
+      greet-short="/home/diya/Downloads/sub-menu-short.wav"
+      invalid-sound="ivr/ivr-that_was_an_invalid_entry.wav"
+      exit-sound="voicemail/vm-goodbye.wav"
+      timeout="15000"
+      max-failures="3"
+      max-timeouts="3">
+     
+    <entry action="menu-exec-app" digits="1" param="transfer 1819 XML default"/>    <!-- know freeswitch -->
+    <entry action="menu-exec-app" digits="2" param="bridge sofia/$${domain}/888@conference.freeswitch.org"/> <!-- freeswitch conference -->
+    <entry action="menu-exec-app" digits="3" param="transfer 1080 XML default"/> <!-- return to main menu -->
+    <entry action="menu-top" digits="*"/>	<!-- repeat this menu -->
+   </menu>
+
+</include>
+
