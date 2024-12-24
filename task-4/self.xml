@@ -1,0 +1,16 @@
+<include>
+  <gateway name="self">
+        <param name="username" value="91002"/>
+       
+        <param name="realm" value="172.16.16.155"/>
+        <param name="proxy" value="172.16.16.155:5060"/>
+       
+        <param name="from-user" value="self"/>
+        <param name="sip-port" value="5060"/>
+        <param name="register" value="true"/>
+       
+        <param name="password" value="diya123"/>
+
+  </gateway>
+</include>
+

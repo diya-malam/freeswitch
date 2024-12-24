@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<include>
+
+        <extension name="checkconfiguration">
+                <condition field="destination_number" expression="^(91002)$">
+			<action application="set" data="dialed_number=$1"/>
+			<action application="set" data="sip_h_Configuration_Ecosmob=FreeSWITCH_Training"/>
+                        <action application="log" data="************** CALLING  ${dialed_number} **************"/>
+                        <action application="log" data="**************${uuid} **************"/>
+			<action application="bridge" data="sofia/diya/self/${destination_number}@$${domain}"/>
+                </condition>
+        </extension>
+
+         <extension name="join_conference">
+		 <condition field="destination_number" expression="self/91002">
+			<action application="set" data="originated_from=3001@$${domain}"/>
+                        <action application="log" data="************** CALLING  ${destination_number} **************"/>
+			<action application="log" data="**************${uuid} **************"/>
+				<!--action application="answer"/-->
+			<action application="conference" data="bridge:${originated_from}@default:user/91002@${domain}"/>
+			
+                </condition>
+	</extension>
+
+</include>
+
