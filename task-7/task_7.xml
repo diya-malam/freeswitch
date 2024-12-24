@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<include>
+
+        <extension name="MySql">
+                <condition field="destination_number" expression="^(1030)$">
+                        <action application="set" data="dialed_number=$1"/>
+                        <action application="log" data="************** CALLEE:  ${dialed_number} **************"/>
+                        <action application="log" data="************** CALLER:  ${caller_id_number} **************"/>
+                        <action application="log" data="**************${uuid} **************"/>
+                        <action application="bridge" data="user/${dialed_number}@${domain_name}"/>
+                        <action application="lua" data="insert_db.lua" inline="true"/>
+                </condition>
+        </extension>
+
+
+</include>
+
+
